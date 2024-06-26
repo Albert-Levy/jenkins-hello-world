@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         JAVA_HOME = 'C:\\java1.8'
-        PYTHON_HOME = 'C:\\Users\\Albert\\AppData\Local\\Programs\\Python\\Python312'
+        PYTHON_HOME = 'C:\\Users\\Albert\\AppData\\Local\\Programs\\Python\\Python312'
         PATH = "${env.PATH};${JAVA_HOME}\\bin;${PYTHON_HOME}"
     }
     stages {
