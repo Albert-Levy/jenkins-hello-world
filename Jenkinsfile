@@ -1,12 +1,14 @@
 pipeline {
     agent any
     environment {
-        PATH = "${env.PATH}:/usr/bin/python3"
+        JAVA_HOME = 'C:\\java1.8'
+        PYTHON_HOME = 'C:\\Users\\Albert\AppData\Local\\Programs\Python\\Python312'
+        PATH = "${env.PATH};${JAVA_HOME}\\bin;${PYTHON_HOME}"
     }
     stages {
         stage('Checkout') {
             steps {
-               git branch: 'main', url: 'https://github.com/Albert-Levy/jenkins-hello-world.git'
+                git branch: 'main', url: 'https://github.com/Albert-Levy/jenkins-hello-world.git'
             }
         }
         stage('Build') {
@@ -14,13 +16,18 @@ pipeline {
                 script {
                     if (isUnix()) {
                         sh 'echo "Running on Unix"'
-                        // Add your Unix-specific build commands here
+                        sh 'javac HelloWorld.java'
+                        sh 'java HelloWorld'
+                        sh 'python3 hello.py'
                     } else {
                         bat 'echo "Running on Windows"'
-                        // Add your Windows-specific build commands here
+                        bat 'javac HelloWorld.java'
+                        bat 'java HelloWorld'
+                        bat 'python hello.py'
                     }
                 }
             }
         }
     }
 }
+
